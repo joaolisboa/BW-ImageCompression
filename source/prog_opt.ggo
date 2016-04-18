@@ -1,0 +1,15 @@
+package "pacodec"
+version "1.0"
+     
+#Options
+option "dict" - "requer nome de dicionário de dados" typestr="dictfile" string no
+option "threads" - "number of threads, defaults to number of cores" int no dependon="parallel-encode"
+
+#GROUP
+defgroup "ops" groupdesc="an operation required" optional
+groupoption "decode" - "Decodes the file to a .pgm file" typestr="codfile" string yes dependon="dict" group="ops"
+groupoption "decode-dir" - "Decodes files with .cod extension in directory" typestr="foldername" string optional dependon="dict" group="ops"
+groupoption "encode" - "Encodes a PGM image" typestr="filename" string optional dependon="dict" group="ops"
+groupoption "parallel-encode" - "Encodes a PGM image in multi-thread mode" typestr="filename" dependon="dict" string optional group="ops"
+groupoption "PSNR" - "PSNR value between original and decoded image" string optional multiple(2-2) group="ops"
+groupoption "about" a "Program info" optional group="ops"
